@@ -1,9 +1,4 @@
 ﻿using Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data
 {
@@ -101,5 +96,38 @@ namespace Data
             context.SaveChanges();
         }
         #endregion
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            using var context = new StudentsDbContext();
+            return context.Students.ToList();
+        }
+
+        public Student GetStudentById(int id)
+        {
+            using var context = new StudentsDbContext();
+            return context.Students.FirstOrDefault(s => s.Id == id);
+        }
+
+        //public Student CreateStudent(string name, string lastName, int age)
+        //{
+        //    using var context = new StudentsDbContext();
+        //    var student = new Student { Name = name, LastName = lastName, Age = age };
+        //    context.Add(student);
+        //    context.SaveChanges();
+        //    return student;
+        //}
+        public Student CreateStudent(Student student)
+        {
+            using var context = new StudentsDbContext();
+
+            if (context.Students.Any(s=>s.Id == student.Id))
+            {
+                throw new DuplicateStudentException("The student exists already on the Database");                                        //check for grammar
+            }
+            context.Add(student);
+            context.SaveChanges();
+            return student;
+        }
     }
 }
