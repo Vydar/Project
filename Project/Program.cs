@@ -1,3 +1,6 @@
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
+
 namespace Project
 {
     public class Program
@@ -11,8 +14,9 @@ namespace Project
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(o=>AddSwaggerDocumentation(o));
 
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -28,6 +32,12 @@ namespace Project
             app.MapControllers();
 
             app.Run();
+        }
+
+        static void AddSwaggerDocumentation(SwaggerGenOptions o)
+        {
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            o.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
         }
     }
 }
