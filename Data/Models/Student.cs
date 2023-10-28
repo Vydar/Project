@@ -7,7 +7,8 @@
         public string Name { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
-        //public Address Address { get; set; } = new Address();
+       
+        public Address Address { get; set; }
       //  public Mark Grade { get; set; } = new Mark();
     }
 }
