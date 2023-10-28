@@ -47,7 +47,9 @@ namespace Project.Controllers
         public StudentToGetDto CreateStudent([FromBody] StudentToCreateDto studenToCreate) =>
             DataAccessLayerSingleton.Instance.CreateStudent(studenToCreate.ToEntity()).ToDto();
 
-        // DELETE STUDENT GOES HERE
+        [HttpDelete]
+        public void DeleteStudent(int id) =>
+            DataAccessLayerSingleton.Instance.DeleteStudent(id);
 
         /// <summary>
         /// Updates an existent Student
@@ -59,13 +61,14 @@ namespace Project.Controllers
             DataAccessLayerSingleton.Instance.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
 
         /// <summary>
-        /// Updates an existent ADDRESS
+        /// Updates an existent Address
         /// </summary>
         /// <param name="addressToUpdate"></param>
         /// <returns></returns>
         [HttpPut]
         public AddressToGetDto UpdateAddress([FromBody] AddressToUpdateDto addressToUpdate) =>
-            DataAccessLayerSingleton.Instance.UpdateAddress(addressToUpdate.ToEntity()).ToDto();    
+            DataAccessLayerSingleton.Instance.UpdateAddress(addressToUpdate.ToEntity()).ToDto();
+
 
     }
 }

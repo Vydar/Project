@@ -111,6 +111,7 @@ namespace Data
             return context.Students.FirstOrDefault(s => s.Id == id);
         }
 
+
         //public Student CreateStudent(string name, string lastName, int age)
         //{
         //    using var context = new StudentsDbContext();
@@ -125,11 +126,24 @@ namespace Data
 
             if (context.Students.Any(s => s.Id == student.Id))
             {
-                throw new DuplicateStudentException("The student exists already on the Database");                                        //check for grammar
+                throw new DuplicateStudentException("The student exists already on the Database");
             }
             context.Add(student);
             context.SaveChanges();
             return student;
+        }
+
+        public void DeleteStudent(int id)
+        {
+            using var context = new StudentsDbContext();
+            var student = context.Students.FirstOrDefault(s => s.Id == id);
+
+            if (student == null)
+            {
+                throw new InvalidIdException("The Id does not match any student on the Database");
+            }
+            context.Students.Remove(student);
+            context.SaveChanges();
         }
 
         public Student UpdateStudent(Student studentToUpdate)
@@ -153,44 +167,43 @@ namespace Data
         public Address UpdateAddress(Address addressToUpdate)
         {
             using var context = new StudentsDbContext();
-            var address = context.Addresses.FirstOrDefault(s => s.Id == addressToUpdate.Id);
 
-            //if (address == null)
-            //{
-            //    var newAddress = new Address
-            //    {
-            //                            City = addressToUpdate.City,
-            //        Street = addressToUpdate.Street,
-            //        Number = addressToUpdate.Number
-            //    };
-            //    context.Add(newAddress);
-            //    context.SaveChanges();
-            //    return newAddress;
-            //}
-            //else
-            //{
-            //    address.City = addressToUpdate.City;
-            //    address.Street = addressToUpdate.Street;
-            //    address.Number = addressToUpdate.Number;
-            //    context.SaveChanges();
-            //    return address;
-            //}
+            var student = context.Students.FirstOrDefault(s => s.Id == addressToUpdate.StudentId);
 
-            if (address == null)
-            { 
-           address = new Address();
-            context.Add(address);
-            }
+            if (student == null)
+            {
+                throw new InvalidIdException("The student does not exist on the DB");
+            }//merge
 
+            var newAddress = context.Addresses.FirstOrDefault(s => s.Id == addressToUpdate.Id);
 
-            address.City = addressToUpdate.City;
-            address.Street = addressToUpdate.Street;
-            address.Number = addressToUpdate.Number;
+            newAddress = student.Address;
+            context.Add(newAddress);
+
+            newAddress.City = addressToUpdate.City;
+            newAddress.Street = addressToUpdate.Street;
+            newAddress.Number = addressToUpdate.Number;
             context.SaveChanges();
-            return address;
-
-
-
+            return newAddress;
+        
         }
+
+        //public Address UpdateAddress(Address addressToUpdate)
+        //{
+        //    using var context = new StudentsDbContext();
+        //    var address = context.Addresses.FirstOrDefault(s => s.Id == addressToUpdate.Id);
+
+        //    if (address == null)
+        //    {
+        //        address = new Address();
+        //        context.Add(address);
+        //    }
+
+        //    address.City = addressToUpdate.City;
+        //    address.Street = addressToUpdate.Street;
+        //    address.Number = addressToUpdate.Number;
+        //    context.SaveChanges();
+        //    return address;
+        //}
     }
 }
