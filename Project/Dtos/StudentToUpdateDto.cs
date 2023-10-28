@@ -1,6 +1,6 @@
 ﻿namespace Project.Dtos
 {
-    public class StudentsToGetDto
+    public class StudentToUpdateDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

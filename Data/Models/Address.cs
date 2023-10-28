@@ -7,7 +7,7 @@
         public string Street { get; set; }
         public int Number { get; set; }
 
-       public int StudentId { get; set; }
+       //public int StudentId { get; set; } // volver a poner
         //public Student Student { get; set; }
 
     }

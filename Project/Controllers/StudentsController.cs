@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos;
 using Project.Utils;
+using Data.Models;
 
 namespace Project.Controllers
 {
@@ -21,7 +22,7 @@ namespace Project.Controllers
         /// Returns all Students from the Database
         /// </summary>
         [HttpGet]
-        public IEnumerable<StudentsToGetDto> GetAllStudents()
+        public IEnumerable<StudentToGetDto> GetAllStudents()
         {
             var allStudents = DataAccessLayerSingleton.Instance.GetAllStudents();
             return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();
@@ -34,7 +35,7 @@ namespace Project.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("/ id / {id}")]
-        public StudentsToGetDto GetStudentById(int id) =>
+        public StudentToGetDto GetStudentById(int id) =>
             DataAccessLayerSingleton.Instance.GetStudentById(id).ToDto(); //DTO as Extension Method
 
         /// <summary>
@@ -43,8 +44,28 @@ namespace Project.Controllers
         /// <param name="studenToCreate">student to create data</param>
         /// <returns>creates student data</returns>
         [HttpPost]
-        public StudentsToGetDto CreateStudent([FromBody] StudentToCreateDto studenToCreate) =>
+        public StudentToGetDto CreateStudent([FromBody] StudentToCreateDto studenToCreate) =>
             DataAccessLayerSingleton.Instance.CreateStudent(studenToCreate.ToEntity()).ToDto();
+
+        // DELETE STUDENT GOES HERE
+
+        /// <summary>
+        /// Updates an existent Student
+        /// </summary>
+        /// <param name="studentToUpdate"></param>
+        /// <returns>New values of a Student</returns>
+        [HttpPatch]
+        public StudentToGetDto UpdateStudent([FromBody] StudentToUpdateDto studentToUpdate) =>
+            DataAccessLayerSingleton.Instance.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
+
+        /// <summary>
+        /// Updates an existent ADDRESS
+        /// </summary>
+        /// <param name="addressToUpdate"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public AddressToGetDto UpdateAddress([FromBody] AddressToUpdateDto addressToUpdate) =>
+            DataAccessLayerSingleton.Instance.UpdateAddress(addressToUpdate.ToEntity()).ToDto();    
 
     }
 }
