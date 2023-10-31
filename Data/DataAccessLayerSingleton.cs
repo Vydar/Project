@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Data.Models;
-
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Data
 {
@@ -164,46 +165,28 @@ namespace Data
             return student;
         }
 
-        public Address UpdateAddress(Address addressToUpdate)
+        public bool UpdateOrCreateStudentAddress(int studentId, Address newAddress)
         {
             using var context = new StudentsDbContext();
+            var student = context.Students.Include(s => s.Address).FirstOrDefault(s=>s.Id == studentId);
 
-            var student = context.Students.FirstOrDefault(s => s.Id == addressToUpdate.StudentId);
-
-            if (student == null)
+            if (studentId == null)
             {
-                throw new InvalidIdException("The student does not exist on the DB");
-            }//merge
+                throw new InvalidIdException("The student Id does not exist on the Database");
+            }
+            var isCreated = false;
+            if (student.Address == null)
+            { 
+                student.Address = newAddress;
+                isCreated = true;
+            }
 
-            var newAddress = context.Addresses.FirstOrDefault(s => s.Id == addressToUpdate.Id);
-
-            newAddress = student.Address;
-            context.Add(newAddress);
-
-            newAddress.City = addressToUpdate.City;
-            newAddress.Street = addressToUpdate.Street;
-            newAddress.Number = addressToUpdate.Number;
+            student.Address.City = newAddress.City;
+            student.Address.Street = newAddress.Street;
+            student.Address.Number = newAddress.Number;
             context.SaveChanges();
-            return newAddress;
-        
+            return isCreated;
         }
-
-        //public Address UpdateAddress(Address addressToUpdate)
-        //{
-        //    using var context = new StudentsDbContext();
-        //    var address = context.Addresses.FirstOrDefault(s => s.Id == addressToUpdate.Id);
-
-        //    if (address == null)
-        //    {
-        //        address = new Address();
-        //        context.Add(address);
-        //    }
-
-        //    address.City = addressToUpdate.City;
-        //    address.Street = addressToUpdate.Street;
-        //    address.Number = addressToUpdate.Number;
-        //    context.SaveChanges();
-        //    return address;
-        //}
+   
     }
 }

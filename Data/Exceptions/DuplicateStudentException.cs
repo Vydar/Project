@@ -3,7 +3,7 @@
 namespace Data
 {
     [Serializable]
-    internal class DuplicateStudentException : Exception
+    public class DuplicateStudentException : Exception
     {
         public DuplicateStudentException()
         {

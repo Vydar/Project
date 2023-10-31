@@ -1,11 +1,26 @@
-﻿namespace Project.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Project.Dtos
 {
+    /// <summary>
+    /// Data used to create or replace an address
+    /// </summary>
     public class AddressToUpdateDto
     {
-        public int Id { get; set; }
-       // public int StudentId { get; set; }
+        /// <summary>
+        /// City
+        /// </summary>
         public string City { get; set; }
+
+        /// <summary>
+        /// Street Name
+        /// </summary>
         public string Street { get; set; }
+
+        /// <summary>
+        /// Street Number
+        /// </summary>
+        [Range(1,int.MaxValue)]
         public int Number { get; set; }
     }
 }

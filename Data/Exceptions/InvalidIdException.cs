@@ -3,7 +3,7 @@
 namespace Data
 {
     [Serializable]
-    internal class InvalidIdException : Exception
+    public class InvalidIdException : Exception
     {
         public InvalidIdException()
         {

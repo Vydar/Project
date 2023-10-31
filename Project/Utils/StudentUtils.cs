@@ -51,18 +51,17 @@ namespace Project.Utils
             }
             return new AddressToGetDto { Id = address.Id, City = address.City, Number = address.Number, Street = address.Street };
         }
-        public static Address ToEntity(this AddressToUpdateDto address)
+        public static Address ToEntity(this AddressToUpdateDto addressToUpdate)
         {
-            if (address == null)
+            if (addressToUpdate == null)
             {
-               // return null;
+               return null;
             }
             return new Address
             {
-                StudentId = address.Id,
-                City = address.City,
-                Street = address.Street,
-                Number = address.Number,
+                City = addressToUpdate.City,
+                Street = addressToUpdate.Street,
+                Number = addressToUpdate.Number,
             };
         }
     }

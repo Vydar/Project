@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project.Dtos;
 using Project.Utils;
 using Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.Controllers
 {
@@ -26,7 +27,6 @@ namespace Project.Controllers
         {
             var allStudents = DataAccessLayerSingleton.Instance.GetAllStudents();
             return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();
-
         }
 
         /// <summary>
@@ -35,8 +35,21 @@ namespace Project.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("/ id / {id}")]
-        public StudentToGetDto GetStudentById(int id) =>
-            DataAccessLayerSingleton.Instance.GetStudentById(id).ToDto(); //DTO as Extension Method
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToGetDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        public ActionResult<StudentToGetDto> GetStudentById([Range(1, int.MaxValue)] int id)
+        {
+            try
+            {
+                return DataAccessLayerSingleton.Instance.GetStudentById(id).ToDto(); //DTO as Extension Method
+            }
+            catch (InvalidIdException exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
 
         /// <summary>
         /// Creates a new Student
@@ -47,9 +60,28 @@ namespace Project.Controllers
         public StudentToGetDto CreateStudent([FromBody] StudentToCreateDto studenToCreate) =>
             DataAccessLayerSingleton.Instance.CreateStudent(studenToCreate.ToEntity()).ToDto();
 
-        [HttpDelete]
-        public void DeleteStudent(int id) =>
-            DataAccessLayerSingleton.Instance.DeleteStudent(id);
+        /// <summary>
+        /// Removes a Student from the Database
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent([Range(1, int.MaxValue)] int id)
+        {
+            //if (id == 0)
+            //{
+            //    return BadRequest("ID can not be 0");
+            //}
+            try
+            {
+                DataAccessLayerSingleton.Instance.DeleteStudent(id);
+            }
+            catch (InvalidIdException exception)
+            {
+                return BadRequest(exception.Message);
+            }
+            return Ok();
+        }
+
 
         /// <summary>
         /// Updates an existent Student
@@ -65,10 +97,20 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="addressToUpdate"></param>
         /// <returns></returns>
-        [HttpPut]
-        public AddressToGetDto UpdateAddress([FromBody] AddressToUpdateDto addressToUpdate) =>
-            DataAccessLayerSingleton.Instance.UpdateAddress(addressToUpdate.ToEntity()).ToDto();
+        /// 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudentAddress([FromRoute] int id, [FromBody] AddressToUpdateDto addressToUpdate)
+        {
+
+            if (DataAccessLayerSingleton.Instance.UpdateOrCreateStudentAddress(id, addressToUpdate.ToEntity())
+            {
+                return Created("success", null);
+            }
+            return Ok();
+        }
 
     }
 }
