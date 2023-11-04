@@ -7,8 +7,9 @@ using System.Runtime.CompilerServices;
 
 namespace Project.Utils
 {
-    public static class StudentUtils
+    public static class StudentUtils //Must be static
     {
+
         public static StudentToGetDto ToDto(this Student student)
         {
             if (student == null)
@@ -53,6 +54,7 @@ namespace Project.Utils
             {
                 return null;
             }
+
             return new AddressToGetDto { Id = address.Id, City = address.City, Number = address.Number, Street = address.Street };
         }
         public static Address ToEntity(this AddressToUpdateDto addressToUpdate)
@@ -83,17 +85,10 @@ namespace Project.Utils
         }
 
 
-        //public static MarkToGetDto ToDto(this Mark mark)
-        //{
-        //    if (mark == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new MarkToGetDto { Id = mark.Id, DateTime = mark.DateTime, Grade = mark.Grade }; // maybe add Subject or student id 
-        //}
+       
 
- 
-        }
 
     }
+
+}
 

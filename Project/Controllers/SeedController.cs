@@ -15,7 +15,7 @@ namespace Project.Controllers
         }
 
         /// <summary>
-        /// Initializes the Database
+        /// Initializes the Database with Students data
         /// </summary>
         [HttpPost()]
         public void Seed() =>

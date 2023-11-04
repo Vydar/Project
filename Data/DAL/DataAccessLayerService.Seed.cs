@@ -9,12 +9,7 @@ using System.Threading.Tasks;
 namespace Data.DAL
 {
     public partial class DataAccessLayerService : IDataAccessLayerService
-    {
-        //private readonly StudentsDbContext context;
-        //public DataAccessLayerSeed(StudentsDbContext context)
-        //{
-        //    this.context = context;
-        //}
+    {       
         public void Seed()
         {
             context.Add(new Student

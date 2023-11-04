@@ -18,10 +18,6 @@ namespace Project.Controllers
             this.dal = dal;
         }
 
-  
-
-
-
         /// <summary>
         /// Returns all Students from the Database
         /// </summary>

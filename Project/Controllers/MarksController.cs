@@ -1,6 +1,13 @@
 ﻿using Data.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Marks;
+using Data;
+using Data.DAL;
+using Microsoft.AspNetCore.Mvc;
+using Project.Dtos.Students;
+using Project.Utils;
+using System.ComponentModel.DataAnnotations;
+using Data.Models;
 
 namespace Project.Controllers
 {
@@ -30,10 +37,32 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="markToCreate"></param>
         /// <returns></returns>
+        /// 
+       
+        [HttpGet("ByStudent/{studentId}")]
+        public IEnumerable<Mark> GetAllMarks([FromRoute] int studentId) =>
+          dal.GetAllMarks(studentId).ToList();
 
-        [HttpGet("{studentId}")]
-        public void GetAllMarks([FromRoute] int studentId) =>
-           dal.GetAllMarks(studentId).ToList();
+
+       
+      
+
+        //[HttpGet("ByStudent/{studentId}")]
+        //public List<Mark> GetMarksByStudent(int studentId)
+        //{
+        //    var allMarks = dal.GetAllMarks(studentId);
+        //    return allMarks.Select(m=>MarksUtils.ToDto(m)).ToList();
+        //}
+
+        //public IEnumerable<StudentToGetDto> GetAllStudents()
+        //{
+        //    var allStudents = dal.GetAllStudents();
+        //    return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();     
+
+        //public IEnumerable<StudentToGetDto> GetAllStudents()
+        //{
+        //    var allStudents = dal.GetAllStudents();
+        //    return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();
 
     }
 }
