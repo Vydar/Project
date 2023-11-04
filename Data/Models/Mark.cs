@@ -11,7 +11,7 @@ namespace Data.Models
     {
         public int Id { get; set; }
         public int Grade { get; set; }
-        public DateTime DateTime { get; set; } // work around this. how to parse datetime???
+        public DateTime DateTime { get; set; } 
         public int? SubjectId { get; set; }
         public Subject Subject { get; set; }
 

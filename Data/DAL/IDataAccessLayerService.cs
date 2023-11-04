@@ -12,5 +12,7 @@ namespace Data.DAL
         bool UpdateOrCreateStudentAddress(int studentId, Address newAddress);
         Student UpdateStudent(Student studentToUpdate);
         Subject CreateSubject(string subjectName);
+        void AddMark(int grade, int studentId, int subjectId);
+        public IEnumerable<Mark> GetAllMarks(int studentId);
     }
 }

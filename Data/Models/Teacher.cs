@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class Subject
+    public class Teacher
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Teacher teacher { get; set; }
-        public List<Student> Students { get; set; } = new List<Student>();
-        public List<Mark> Marks { get; set; } = new List<Mark>();
+        public string Address { get; set; }
+        //public enum Rank 
+
+        
 
     }
 }

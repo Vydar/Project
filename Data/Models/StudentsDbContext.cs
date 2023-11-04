@@ -4,15 +4,13 @@ using System.Configuration;
 
 namespace Data.Models
 {
-    public class StudentsDbContext : DbContext, IStudentsDbContext
+    public class StudentsDbContext : DbContext //implement interface to make private
     {
         //private readonly string connectionString;
         //public StudentsDbContext(string connString)
         //{
         //    this.connectionString = connString;
         //}
-
-
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Address> Addresses { get; set; }

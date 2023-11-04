@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Data.DAL
 {
-    public class DataAccessLayerSubjects
+    public partial class DataAccessLayerService : IDataAccessLayerService
     {
-        private readonly StudentsDbContext context;
-        public DataAccessLayerSubjects(StudentsDbContext context)
-        {
-            this.context = context;
-        }
+        //private readonly StudentsDbContext context;
+        //public DataAccessLayerSubjects(StudentsDbContext context)
+        //{
+        //    this.context = context;
+        //}
         public Subject CreateSubject(string subjectName)
         {
             //using var context = new StudentsDbContext(connectionString);

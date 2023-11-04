@@ -8,16 +8,10 @@ using System.Threading.Tasks;
 namespace Data.DAL
 {
     // public partial class DataAccessLayerService
-    public class DataAccessLayerMarks
+    public partial class DataAccessLayerService : IDataAccessLayerService
     {
-        private readonly StudentsDbContext context;
-        public DataAccessLayerMarks(StudentsDbContext context)
-        {
-            this.context = context;
-        }
         public void AddMark(int grade, int studentId, int subjectId)
-        {
-           // using var context = new StudentsDbContext(connectionString);
+        {         
             if (!context.Students.Any(s => s.Id == studentId))
             {
                 throw new InvalidIdException("Invalid Student Id");

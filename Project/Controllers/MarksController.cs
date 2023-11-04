@@ -9,8 +9,8 @@ namespace Project.Controllers
     public class MarksController : ControllerBase
     {
 
-        private readonly DataAccessLayerMarks dal;
-        public MarksController(DataAccessLayerMarks dal)
+        private readonly IDataAccessLayerService dal;
+        public MarksController(IDataAccessLayerService dal)
         {
             this.dal = dal;
         }
