@@ -1,3 +1,6 @@
+using Data;
+using Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
@@ -8,8 +11,13 @@ namespace Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connString = builder.Configuration.GetConnectionString("SqlDbConnectionString");
 
             // Add services to the container.
+            builder.Services.AddDbContext<StudentsDbContext>(options => options.UseSqlServer(connString));
+            //builder.Services.AddDataAccessLayer(connString);
+            // builder.Services.AddSingleton<StudentsDbContext>();
+            builder.Services.AddScoped<StudentsDbContext>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,11 +31,15 @@ namespace Project
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.DefaultModelsExpandDepth(-1); //To reset the Schemas from previous session - its ok?
+                });
             }
 
-            app.UseAuthorization();
+                app.UseAuthorization();
 
+         
 
             app.MapControllers();
 

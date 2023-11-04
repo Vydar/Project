@@ -1,4 +1,4 @@
-﻿namespace Project.Dtos
+﻿namespace Project.Dtos.Students
 {
     public class StudentToUpdateDto
     {

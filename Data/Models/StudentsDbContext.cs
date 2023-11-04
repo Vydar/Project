@@ -2,17 +2,21 @@
 
 namespace Data.Models
 {
-    internal class StudentsDbContext : DbContext
+    public class StudentsDbContext : DbContext // was internal
     {
+        //private readonly string connectionString;
+        //public StudentsDbContext(string connString)
+        //{
+        //    this.connectionString = connString; 
+        //}
         public DbSet<Student> Students { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public StudentsDbContext()
+        public DbSet<Mark> Marks { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+    
+        public StudentsDbContext(DbContextOptions<StudentsDbContext> options) : base(options)
         {
             Database.EnsureCreated();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Yardi\source\repos\Project\Data\StudentsDb.mdf;Integrated Security=True");
-        }
+        }            
     }
 }

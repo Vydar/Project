@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Project.Dtos
+namespace Project.Dtos.Students
 {
     /// <summary>
     /// Data used to create or replace an address
@@ -20,7 +20,7 @@ namespace Project.Dtos
         /// <summary>
         /// Street Number
         /// </summary>
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         public int Number { get; set; }
     }
 }

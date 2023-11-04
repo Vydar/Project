@@ -7,8 +7,10 @@
         public string Name { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
-       
         public Address Address { get; set; }
-      //  public Mark Grade { get; set; } = new Mark();
+        public List<Mark> marks { get; set; } = new List<Mark>();
+        public List<Subject> subjects { get; set; } = new List<Subject>();
+        
+         
     }
 }

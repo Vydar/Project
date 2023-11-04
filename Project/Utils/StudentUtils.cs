@@ -1,5 +1,9 @@
 ﻿using Data.Models;
-using Project.Dtos;
+using Project.Dtos.Marks;
+using Project.Dtos.Students;
+using Project.Dtos.Subjects;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace Project.Utils
 {
@@ -55,7 +59,7 @@ namespace Project.Utils
         {
             if (addressToUpdate == null)
             {
-               return null;
+                return null;
             }
             return new Address
             {
@@ -64,5 +68,32 @@ namespace Project.Utils
                 Number = addressToUpdate.Number,
             };
         }
+
+
+        public static Subject ToEntity(this SubjectToCreateDto subject)
+        {
+            if (subject == null)
+            {
+                return null;
+            }
+            return new Subject
+            {
+                Name = subject.Name
+            };
+        }
+
+
+        //public static MarkToGetDto ToDto(this Mark mark)
+        //{
+        //    if (mark == null)
+        //    {
+        //        return null;
+        //    }
+        //    return new MarkToGetDto { Id = mark.Id, DateTime = mark.DateTime, Grade = mark.Grade }; // maybe add Subject or student id 
+        //}
+
+ 
+        }
+
     }
-}
+
