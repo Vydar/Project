@@ -12,12 +12,13 @@ namespace Project.Controllers
     public class StudentsController : ControllerBase
     {
 
-        private readonly DataAccessLayerService dal;
-        public StudentsController(DataAccessLayerService dal)
+        private readonly IDataAccessLayerService dal;
+        public StudentsController(IDataAccessLayerService dal)
         {
             this.dal = dal;
         }
-          
+
+  
 
 
 

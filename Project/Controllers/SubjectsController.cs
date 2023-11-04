@@ -30,8 +30,8 @@ namespace Project.Controllers
         //    return Ok(newSubject);
         //}
 
-        private readonly DataAccessLayerService dal;
-        public SubjectsController(DataAccessLayerService dal)
+        private readonly IDataAccessLayerService dal;
+        public SubjectsController(IDataAccessLayerService dal)
         {
             this.dal = dal;
         }
@@ -41,7 +41,7 @@ namespace Project.Controllers
         /// </summary>
         [HttpPost()]
         public void CreateSubject([FromBody]string subjectName) =>
-            dal.
+            dal.CreateSubject(subjectName); //toDTO missing
 
     }
 }

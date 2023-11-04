@@ -8,8 +8,8 @@ namespace Project.Controllers
     [ApiController]
     public class SeedController : ControllerBase
     {
-        private readonly DataAccessLayerService dal;
-        public SeedController(DataAccessLayerService dal)
+        private readonly IDataAccessLayerService dal;
+        public SeedController(IDataAccessLayerService dal)
         {
             this.dal = dal;
         }
@@ -19,7 +19,6 @@ namespace Project.Controllers
         /// </summary>
         [HttpPost()]
         public void Seed() =>
-            dal.Seed();
-
+          dal.Seed();
     }
 }

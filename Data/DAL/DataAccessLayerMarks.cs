@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace Data.DAL
 {
-    public partial class DataAccessLayerService
+    // public partial class DataAccessLayerService
+    public class DataAccessLayerMarks
     {
+        private readonly StudentsDbContext context;
+        public DataAccessLayerMarks(StudentsDbContext context)
+        {
+            this.context = context;
+        }
         public void AddMark(int grade, int studentId, int subjectId)
         {
-
+           // using var context = new StudentsDbContext(connectionString);
             if (!context.Students.Any(s => s.Id == studentId))
             {
                 throw new InvalidIdException("Invalid Student Id");
@@ -30,13 +36,12 @@ namespace Data.DAL
         //    using var context = new StudentsDbContext();
         //    return context.Students.ToList();
         //}
-        //public IEnumerable<Mark> GetAllMarks(int studentId)
-        //{
-        //    using var context = new StudentsDbContext();
-        //   //ar student = context.Students.Any(s => s.Id == studentId);
 
-        //   var marks = context.Marks.All(s => s.Id == studentId);
-        //    return marks.ToString();
-        //}
+        public IEnumerable<Mark> GetAllMarks(int studentId)
+        {
+           // using var context = new StudentsDbContext(connectionString);
+            var marks = context.Marks.Where(s => s.Id == studentId);
+            return marks;
+        }
     }
 }
