@@ -30,13 +30,42 @@ namespace Data.DAL
 
         public IEnumerable<Mark> GetAllMarks(int studentId)
         {
-            var marks = context.Marks
-                              .Where(m => m.StudentId == studentId)
-                              .ToList();
-
+            var marks = context.Marks.Where(m => m.StudentId == studentId).ToList();
             return marks;
         }
 
-       
+        //public Mark GetMarkBySubject(int studentId, int subjectId)
+        //{
+        //    if (!context.Students.Any(s => s.Id == studentId))
+        //    {
+        //        throw new InvalidIdException("Invalid Student Id");
+        //    }
+        //    if (!context.Subjects.Any(s => s.Id == subjectId))
+        //    {
+        //        throw new InvalidIdException("Invalid Subject Id");
+        //    }
+
+        //    var mark = context.Marks.FirstOrDefault(s=>  s.StudentId == studentId && s.SubjectId == subjectId);
+        //    return mark;
+
+        //}
+
+
+        public IEnumerable<Mark> GetMarkBySubject(int studentId, int subjectId)
+        {
+            if (!context.Students.Any(s => s.Id == studentId))
+            {
+                throw new InvalidIdException("Invalid Student Id");
+            }
+            if (!context.Subjects.Any(s => s.Id == subjectId))
+            {
+                throw new InvalidIdException("Invalid Subject Id");
+            }
+
+            var mark = context.Marks.Where(s => s.StudentId == studentId && s.SubjectId == subjectId);
+            return mark.ToList();
+        }
+
+
     }
 }

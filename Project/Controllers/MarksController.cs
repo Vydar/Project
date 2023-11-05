@@ -23,7 +23,7 @@ namespace Project.Controllers
         }
 
         /// <summary>
-        /// Adds a new Note to a Subject
+        /// Assigns a note to a student
         /// </summary>
         /// <param name="markToCreate"></param>
         /// <returns></returns>
@@ -33,36 +33,25 @@ namespace Project.Controllers
         dal.AddMark(mark.Grade, mark.StudentId, mark.SubjectId);
 
         /// <summary>
-        /// Gets all notes from a student
+        /// Gets all notes of a student
         /// </summary>
         /// <param name="markToCreate"></param>
         /// <returns></returns>
         /// 
-       
+
         [HttpGet("ByStudent/{studentId}")]
         public IEnumerable<Mark> GetAllMarks([FromRoute] int studentId) =>
           dal.GetAllMarks(studentId).ToList();
 
 
-       
-      
-
-        //[HttpGet("ByStudent/{studentId}")]
-        //public List<Mark> GetMarksByStudent(int studentId)
-        //{
-        //    var allMarks = dal.GetAllMarks(studentId);
-        //    return allMarks.Select(m=>MarksUtils.ToDto(m)).ToList();
-        //}
-
-        //public IEnumerable<StudentToGetDto> GetAllStudents()
-        //{
-        //    var allStudents = dal.GetAllStudents();
-        //    return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();     
-
-        //public IEnumerable<StudentToGetDto> GetAllStudents()
-        //{
-        //    var allStudents = dal.GetAllStudents();
-        //    return allStudents.Select(s => StudentUtils.ToDto(s)).ToList();
-
+        /// <summary>
+        /// Gets notes of a student for a specific course
+        /// </summary>
+        /// <param name="markToCreate"></param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        public IEnumerable<Mark> GetMarkbySubject(int studentId, int subjectId)=>
+            dal.GetMarkBySubject(studentId, subjectId);
     }
 }
