@@ -8,6 +8,7 @@ namespace Project.Dtos.Marks
 
         public int Grade { get; set; }
         public DateTime DateTime { get; set; }
+        public double Average { get; set; }
         public int? SubjectId { get; set; }
         public int StudentId { get; set; }
         public int? SubjectName { get; set; }

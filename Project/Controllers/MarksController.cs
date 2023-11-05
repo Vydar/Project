@@ -53,5 +53,17 @@ namespace Project.Controllers
         [HttpGet]
         public IEnumerable<Mark> GetMarkbySubject(int studentId, int subjectId)=>
             dal.GetMarkBySubject(studentId, subjectId);
+
+
+        /// <summary>
+        /// Returns the average for each Subject
+        /// </summary>
+        /// <param name="MarkToGetDto"></param>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        [HttpGet("{studentId}")]
+        public IEnumerable<Mark> GetAllMarksAverage(int studentId) =>
+            dal.GetAllMarksAverage(studentId);
+
     }
 }

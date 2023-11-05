@@ -14,6 +14,7 @@ namespace Data.DAL
         Subject CreateSubject(string subjectName);
         void AddMark(int grade, int studentId, int subjectId);
         IEnumerable<Mark> GetAllMarks(int studentId);
-       IEnumerable <Mark> GetMarkBySubject(int studentId, int subjectId);
+        IEnumerable<Mark> GetMarkBySubject(int studentId, int subjectId);
+        public IEnumerable<Mark> GetAllMarksAverage(int studentId);
     }
 }

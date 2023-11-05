@@ -47,7 +47,7 @@ namespace Data.DAL
 
         public Student UpdateStudent(Student studentToUpdate)
         {        
-                        var student = context.Students.FirstOrDefault(s => s.Id == studentToUpdate.Id);
+            var student = context.Students.FirstOrDefault(s => s.Id == studentToUpdate.Id);
             if (student == null)
             {
                 throw new InvalidIdException("The student Id does not exist on the Database");

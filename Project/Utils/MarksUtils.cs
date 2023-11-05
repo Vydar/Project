@@ -14,7 +14,7 @@ namespace Project.Utils
                 return null;
             }
 
-            return new MarkToGetDto { Id = mark.Id, DateTime = mark.DateTime, Grade = mark.Grade, StudentName = mark.StudentName, SubjectName = mark.SubjectName };
+            return new MarkToGetDto { Id = mark.Id, DateTime = mark.DateTime, Grade = mark.Grade, StudentName = mark.StudentName, SubjectName = mark.SubjectName, Average =mark.Average };
         }
 
       

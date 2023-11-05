@@ -16,6 +16,7 @@ namespace Data.Models
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         public StudentsDbContext(DbContextOptions<StudentsDbContext> options) : base(options)
         {

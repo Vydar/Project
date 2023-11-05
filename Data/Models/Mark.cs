@@ -12,6 +12,8 @@ namespace Data.Models
         public int Id { get; set; }
         public int Grade { get; set; }
         public DateTime DateTime { get; set; } 
+
+        public double Average { get; set; } // NEW VARIABLE
         public int? SubjectId { get; set; }
         public Subject Subject { get; set; }
 
