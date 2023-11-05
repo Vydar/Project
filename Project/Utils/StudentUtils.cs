@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Microsoft.EntityFrameworkCore.Query;
 using Project.Dtos.Marks;
 using Project.Dtos.Students;
 using Project.Dtos.Subjects;
@@ -48,15 +49,6 @@ namespace Project.Utils
             };
         }
 
-        public static AddressToGetDto ToDto(this Address address)
-        {
-            if (address == null)
-            {
-                return null;
-            }
-
-            return new AddressToGetDto { Id = address.Id, City = address.City, Number = address.Number, Street = address.Street };
-        }
         public static Address ToEntity(this AddressToUpdateDto addressToUpdate)
         {
             if (addressToUpdate == null)
@@ -72,19 +64,37 @@ namespace Project.Utils
         }
 
 
-        public static Subject ToEntity(this SubjectToCreateDto subject)
+
+
+
+
+
+
+
+        public static MarkToGetDto ToDto2(this Mark mark, Student student)
         {
-            if (subject == null)
+            if (mark == null)
             {
                 return null;
             }
-            return new Subject
-            {
-                Name = subject.Name
-            };
+
+            return new MarkToGetDto { StudentName = student.Name, Average = mark.Average };
         }
+        //public static Mark ToEntity2(this MarkToGetDto mark)
+        //{
+        //    if (mark == null)
+        //    {
+        //        return null;
+        //    }            
 
+        //    return new Mark
+        //    {
+        //        Average = mark.Average,
+        //        //StudentName = mark.StudentName       
+        //    };
+        //}
 
+     
        
 
 

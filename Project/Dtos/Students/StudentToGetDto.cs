@@ -6,5 +6,8 @@
         public string Name { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
+        public int StudentId { get; set; }
+       
+        public List<GradeDto> Grades { get; set; } // This is the new property
     }
 }

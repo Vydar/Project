@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Marks;
 using Data;
-using Data.DAL;
-using Microsoft.AspNetCore.Mvc;
-using Project.Dtos.Students;
 using Project.Utils;
-using System.ComponentModel.DataAnnotations;
 using Data.Models;
+using Project.Dtos.Subjects;
+using Project.Dtos.Students;
 
 namespace Project.Controllers
 {
@@ -51,19 +49,68 @@ namespace Project.Controllers
         /// <returns></returns>
         /// 
         [HttpGet]
-        public IEnumerable<Mark> GetMarkbySubject(int studentId, int subjectId)=>
+        public IEnumerable<Mark> GetMarkbySubject(int studentId, int subjectId) =>
             dal.GetMarkBySubject(studentId, subjectId);
 
 
         /// <summary>
         /// Returns the average for each Subject
         /// </summary>
-        /// <param name="MarkToGetDto"></param>
         /// <param name="studentId"></param>
         /// <returns></returns>
         [HttpGet("{studentId}")]
         public IEnumerable<Mark> GetAllMarksAverage(int studentId) =>
             dal.GetAllMarksAverage(studentId);
 
+        ////   V2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ////[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MarkToGetDto))]
+        ////[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        ////[ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        //[HttpGet("{studentId}")]
+        //public ActionResult<IEnumerable<SubjectAverageDto>> GetAllMarksAverage(int studentId)
+        //{
+        //    var averages = dal.GetAllMarksAverage(studentId);
+        //    try
+        //    {
+        //        dal.GetAllMarksAverage(studentId);
+        //        return Ok(averages);
+        //    }
+        //    catch (InvalidIdException exception)
+        //    {
+        //        return BadRequest(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Returns a list of student ordered by Grade
+        ///// </summary>
+        ///// <returns></returns>
+
+        //[HttpGet("OrderedByMarks")]
+        //public IEnumerable<MarkToGetDto> GetAllStudentsByOrder()
+        //{
+        //    var student = new Student();
+        //    Mark mark;
+        //    return dal.GetAllStudentsByOrder().Select(s=> StudentUtils.ToDto2(s,student)).ToList();     //works but doesnt return the name and doesnt sum all the 
+        //}
+
+        // GET: api/Students/WithAverages?order=ascending
+        [HttpGet("WithAverages")]
+        public ActionResult<IEnumerable<StudentAverageDto>> GetStudentsWithAverages([FromQuery] string order = "descending")
+        {
+            try
+            {
+                var studentsOrderedByAverages = dal.GetStudentsWithAverageGrade(order);
+
+                return Ok(studentsOrderedByAverages);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
+        }
+
     }
+
 }

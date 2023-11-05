@@ -1,11 +1,5 @@
 ﻿using Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Data.DAL
 {
@@ -74,27 +68,37 @@ namespace Data.DAL
                     mark.Average = subjectAverage.AverageMark;
                 }
             }
-
-            // Save the changes to the database.
             context.SaveChanges();
 
-            // Retrieve and return the updated marks for the student.
-            var updatedMarks = context.Marks
-                .Where(m => m.StudentId == studentId)
-                .ToList();
-
+            var updatedMarks = context.Marks.Where(m => m.StudentId == studentId).ToList();
             return updatedMarks;
         }
-        //public IEnumerable<Mark> GetAllMarksAverage(int studentId)
+
+
+        //public IEnumerable<Mark> GetAllStudentsByOrder()
         //{
-        //    var average = context.Marks.Select(p => p.Grade).Average();
-            
-        //    var mark = context.Marks.Where(s => s.StudentId == studentId);
-        //    return mark.ToList();
-
-
+        //    return context.Marks.Include(s=>s.Student.Name).OrderByDescending(s=>s.Average).ToList();
         //}
-    
+        //
 
+        public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(string order = "descending")
+        {
+            var studentsWithAverages = context.Students
+                .Select(student => new StudentAverageDto
+                {
+                    StudentId = student.Id,
+                    Name = student.Name,
+                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0
+                });
+
+            if (order.ToLower() == "ascending")
+            {
+                return studentsWithAverages.OrderBy(s => s.AverageGrade).ToList();
+            }
+            else // Default to descending
+            {
+                return studentsWithAverages.OrderByDescending(s => s.AverageGrade).ToList();
+            }
+        }
     }
 }

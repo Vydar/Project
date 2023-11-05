@@ -15,6 +15,11 @@ namespace Data.DAL
         void AddMark(int grade, int studentId, int subjectId);
         IEnumerable<Mark> GetAllMarks(int studentId);
         IEnumerable<Mark> GetMarkBySubject(int studentId, int subjectId);
-        public IEnumerable<Mark> GetAllMarksAverage(int studentId);
+         public IEnumerable<Mark> GetAllMarksAverage(int studentId);
+       // IEnumerable<Mark> GetAllStudentsByOrder();
+        IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(string order = "descending")
+
+
     }
+        
 }
