@@ -12,4 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
   </ItemGroup>
 
+  <Import Project="..\SharedData\SharedData.projitems" Label="Shared" />
+
 </Project>

@@ -81,33 +81,24 @@ namespace Project.Controllers
         //    }
         //}
 
-        ///// <summary>
-        ///// Returns a list of student ordered by Grade
-        ///// </summary>
-        ///// <returns></returns>
-
-        //[HttpGet("OrderedByMarks")]
-        //public IEnumerable<MarkToGetDto> GetAllStudentsByOrder()
-        //{
-        //    var student = new Student();
-        //    Mark mark;
-        //    return dal.GetAllStudentsByOrder().Select(s=> StudentUtils.ToDto2(s,student)).ToList();     //works but doesnt return the name and doesnt sum all the 
-        //}
-
-        // GET: api/Students/WithAverages?order=ascending
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentAverageDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [HttpGet("WithAverages")]
-        public ActionResult<IEnumerable<StudentAverageDto>> GetStudentsWithAverages([FromQuery] string order = "descending")
+        public ActionResult<IEnumerable<StudentAverageDto>> GetStudentsWithAverages([FromQuery] bool order)
         {
             try
             {
                 var studentsOrderedByAverages = dal.GetStudentsWithAverageGrade(order);
-
                 return Ok(studentsOrderedByAverages);
             }
             catch (Exception ex)
             {
-                // Log the exception as needed
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+                return StatusCode(StatusCodes.Status404NotFound, "No data found on the database");
             }
         }
 

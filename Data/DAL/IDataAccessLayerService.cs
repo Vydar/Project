@@ -1,4 +1,6 @@
 ﻿using Data.Models;
+using Project.Dtos.Marks;
+
 
 namespace Data.DAL
 {
@@ -16,8 +18,8 @@ namespace Data.DAL
         IEnumerable<Mark> GetAllMarks(int studentId);
         IEnumerable<Mark> GetMarkBySubject(int studentId, int subjectId);
          public IEnumerable<Mark> GetAllMarksAverage(int studentId);
-       // IEnumerable<Mark> GetAllStudentsByOrder();
-        IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(string order = "descending")
+        // IEnumerable<Mark> GetAllStudentsByOrder();
+        IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order);
 
 
     }

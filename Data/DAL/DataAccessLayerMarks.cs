@@ -1,5 +1,5 @@
 ﻿using Data.Models;
-
+using Project.Dtos.Marks;
 
 namespace Data.DAL
 {
@@ -81,7 +81,7 @@ namespace Data.DAL
         //}
         //
 
-        public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(string order = "descending")
+        public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order)
         {
             var studentsWithAverages = context.Students
                 .Select(student => new StudentAverageDto
@@ -91,11 +91,11 @@ namespace Data.DAL
                     AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0
                 });
 
-            if (order.ToLower() == "ascending")
+            if (order == false)
             {
                 return studentsWithAverages.OrderBy(s => s.AverageGrade).ToList();
             }
-            else // Default to descending
+            else 
             {
                 return studentsWithAverages.OrderByDescending(s => s.AverageGrade).ToList();
             }

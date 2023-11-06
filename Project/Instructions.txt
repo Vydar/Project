@@ -1,0 +1,118 @@
+﻿
+---------------------------------------------------------------------------------------------
+                            Proiect - Catalog online
+---------------------------------------------------------------------------------------------
+																							-
+• Proiectul contine mai multe sectiuni. Prima sectiune, partea 1, reprezinta terminarea     -
+temei din laboratorul 19, impreuna cu punctele suplimentare, status codes si parameter      -
+validation                                                                                  -
+																							-
+• Celelalte parti trebuie sa mi le trimitei pana pe data de 12.10.2022, pentru a avea timp	-
+sa va dau feedback si pentru a va oferi suficient timp ca sa corectati eventuale probleme   -
+• Construiti un repository nou (proiect) si reimplementati codul loboratorului 19 folosind  -
+terminologie in limba engleza.																-
+																							-
+• Pentru a putea lucra mai usor, va sugerez sa faceti mai multe commit-uri si push-uri in   -
+acelasi repository																			-
+																							-
+IMPORTANT																				    -
+• Folositi entity framework																    -
+• Folositi ASP.net WEB api																	-
+																							-
+---------------------------------------PARTEA 1 ---------------------------------------------
+• Student este caracterizat de urmatoarele
+*Nume
+*Prenume
+*Varsta
+*Adresa
+
+• Address este caracterizata de
+*Oras:string
+*Strada
+*Numar
+
+•Creeati un proiect de tip asp.net web api
+• Creeati modelul, populati DB
+• Adaugati PK, FK precum si relatiile necesare
+• Adaugati controllerul necesar (vedeti slide-ul urmator)
+
+• Adaugati endpoint-uri pentru:
+	-Obtinerea tuturorstudentilor
+	-Obtinerea unui student dupa ID
+	-Creeare student
+	-Stergere student
+	-Modificare date student
+	-Obtinerea adresei unui student
+	-Modificare adresa student
+	 In cazul in care studentul nu are adresa, aceasta va fi creeata
+	-Stergerea unui student
+	 Cu un parametru care va specifica daca adresa este la randul ei stearsa
+
+• Adaugati XML comments pentru endpoint-urile create
+• Folositi “Enable xml comments in swagger”
+• Folositi DTO-uri.
+• Folositi extension methods pentru a creea dto-uri
+• Adaugati status codes si parameter validat
+
+----------------------------------PARTEA 2 --------------------------------
+• Student
+	-Poate primi Note (Marks)
+• Nota (Mark) va fi caracterizata de :
+	- o valoare numerica intre 1 si 10 ( value)
+	-Data si ora acordarii
+	-Cursul (Subject) pentru care a fost acordata nota
+		*Cursul (Subject) va contine
+		*Nume
+
+• Actualizati modelul, populati DB
+• Adaugati PK, FK precum si relatiile necesare
+• Adaugati XML comments pentru endpoint-urile create
+	-Folositi “Enable xml comments in swagger”
+• Folositi DTO-uri.
+• Folositi extension methods pentru a creea dto-uri
+• Adaugati status codes si parameter validation
+
+• Adaugati endpoint-uri pentru
+	-Adaugarea unui curs
+	-Acordarea unei note unui student
+		*La adaugarea notei serverul va complete automat data si ora
+		acordarii ca fiind data si ora curenta
+	-Obtinerea tuturor notelor unui student
+	-Obtinerea notelor unui student pentru un anumit curs
+	-Obtinerea mediilor per materie ale unui student
+	-Obtinerea listei studentilor in ordine a mediilor
+	-Ordinea este configurabila ascending/descending
+		*DTO-ul va returna informatiile despre student, fara adresa, note,
+		 dar cu media generala calculate
+	-Stergerea unui student
+		*Ce alte stergeri implica?
+
+------------------------------------ PARTEA 3 --------------------------------
+• Cursul (Subject) va fi caracterizat de
+	-Un teacher - Un teacher va fi caracterizat de
+		-Name
+		-Address
+		-rank
+• Enumerare continand urmatoarele valori :
+		• Professor
+		• Associate Professor
+		• Assistant Professor
+		• Instructor
+
+• Adaugati endpoint-uri pentru
+	-Stergerea unui curs
+		Ce alte stergeri implica?
+	-Adaugarea unui teacher
+	-Stergerea unui teacher
+		Cum tratati stergerea?
+	-Schimbarea adresei unui teacher
+	-Alocarea unui curs pentru un teacher
+	-Promovarea teacher-ului
+		-Instructor devine assistant professor
+		-Assistant professor devine associate professor
+		-Samd
+	-Obtinerea tuturor notelor acordate de catre un teacher
+		Va returna o lista ce va contine DTO-uri continand
+		valoarea notei, data acordarii precum si id-ul studentului
+
+-----------------------------------------------------------------------------

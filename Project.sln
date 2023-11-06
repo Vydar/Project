@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{B829E426-B5A5-4A59-9088-0F01CF3CB466}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project", "Project\Project.csproj", "{B829E426-B5A5-4A59-9088-0F01CF3CB466}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{CBCBEA53-8D6C-48FA-BD67-9437F30B2BF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{CBCBEA53-8D6C-48FA-BD67-9437F30B2BF8}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedData", "SharedData\SharedData.shproj", "{D0DACEBE-1BCB-4FB8-9963-528BA204B52F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,5 +29,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C84A0CE8-9E86-49D9-A632-466A0F64677B}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedData\SharedData.projitems*{cbcbea53-8d6c-48fa-bd67-9437f30b2bf8}*SharedItemsImports = 5
+		SharedData\SharedData.projitems*{d0dacebe-1bcb-4fb8-9963-528ba204b52f}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
