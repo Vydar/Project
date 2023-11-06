@@ -21,6 +21,8 @@ namespace Data.DAL
         // IEnumerable<Mark> GetAllStudentsByOrder();
         IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order);
 
+        void DeleteSubject(int id);
+
 
     }
         

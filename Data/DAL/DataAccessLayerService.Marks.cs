@@ -72,14 +72,7 @@ namespace Data.DAL
 
             var updatedMarks = context.Marks.Where(m => m.StudentId == studentId).ToList();
             return updatedMarks;
-        }
-
-
-        //public IEnumerable<Mark> GetAllStudentsByOrder()
-        //{
-        //    return context.Marks.Include(s=>s.Student.Name).OrderByDescending(s=>s.Average).ToList();
-        //}
-        //
+        }          
 
         public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order)
         {
@@ -88,17 +81,22 @@ namespace Data.DAL
                 {
                     StudentId = student.Id,
                     Name = student.Name,
-                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0
-                });
+                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0    //If the student has any marks, then calculate the average grade of those marks. Otherwise, set the average grade to 0.               
+                });                                                                                 //?: This is the ternary operator that acts as a shorthand if. If the condition before the ? is true, the expression immediately after the ? is executed.
 
             if (order == false)
             {
                 return studentsWithAverages.OrderBy(s => s.AverageGrade).ToList();
             }
-            else 
+            else
             {
                 return studentsWithAverages.OrderByDescending(s => s.AverageGrade).ToList();
             }
         }
+
+
+
+
     }
 }
+

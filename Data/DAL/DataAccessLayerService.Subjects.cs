@@ -16,5 +16,20 @@ namespace Data.DAL
             context.SaveChanges();
             return subject;
         }
+
+        public void DeleteSubject(int id)
+        {
+            var subject = context.Subjects.FirstOrDefault(s => s.Id == id );
+            var marks = context.Marks.Where(s => s.SubjectId == id );
+            if (subject == null)
+            {
+                throw new InvalidIdException("The Id does not match any subject on the Database");
+            }
+            //context.Marks.Remove(mark);
+            context.RemoveRange(marks);
+            context.Subjects.Remove(subject);
+           
+            context.SaveChanges();
+        }
     }
 }
