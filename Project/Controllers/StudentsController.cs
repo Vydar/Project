@@ -92,7 +92,7 @@ namespace Project.Controllers
             dal.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
 
         /// <summary>
-        /// Updates an existent Address
+        /// Updates or creates an Address
         /// </summary>
         /// <param name="addressToUpdate"></param>
         /// <returns></returns>

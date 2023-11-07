@@ -20,7 +20,7 @@ namespace Project.Controllers
         }
 
         /// <summary>
-        /// Initializes the Database
+        /// Creates a new Subject
         /// </summary>
         [HttpPost()]
         public void CreateSubject([FromBody] string subjectName) =>
@@ -33,7 +33,7 @@ namespace Project.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        [HttpDelete("{id}")] //delete subject? 
+        [HttpDelete("{id}")] 
         public IActionResult DeleteSubject(int id)
         {
             if (id == 0)

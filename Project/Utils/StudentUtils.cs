@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore.Query;
 using Project.Dtos.Marks;
 using Project.Dtos.Students;
 using Project.Dtos.Subjects;
+using Project.Dtos.Teachers;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace Project.Utils
 {
-    public static class StudentUtils //Must be static
+    public static class StudentUtils 
     {
 
         public static StudentToGetDto ToDto(this Student student)
@@ -63,39 +64,8 @@ namespace Project.Utils
             };
         }
 
+      
 
-
-
-
-
-
-
-
-        public static MarkToGetDto ToDto2(this Mark mark, Student student)
-        {
-            if (mark == null)
-            {
-                return null;
-            }
-
-            return new MarkToGetDto { StudentName = student.Name, Average = mark.Average };
-        }
-        //public static Mark ToEntity2(this MarkToGetDto mark)
-        //{
-        //    if (mark == null)
-        //    {
-        //        return null;
-        //    }            
-
-        //    return new Mark
-        //    {
-        //        Average = mark.Average,
-        //        //StudentName = mark.StudentName       
-        //    };
-        //}
-
-     
-       
 
 
     }

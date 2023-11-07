@@ -14,7 +14,7 @@ namespace Data.Models
         public string Address { get; set; }
         public Rank Rank { get; set; }
 
-        public List<Subject> Subjects { get; set; } 
+        public int SubjectId { get; set; }
 
     }
 }
