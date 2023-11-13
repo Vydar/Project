@@ -1,5 +1,6 @@
 ﻿using Data;
 using Data.DAL;
+using Data.Exceptions;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Marks;
@@ -8,6 +9,9 @@ using Project.Utils;
 
 namespace Project.Controllers
 {
+    /// <summary>
+    /// Controller that handles requests/responses for student's subjects
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
 

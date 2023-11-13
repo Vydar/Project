@@ -1,15 +1,13 @@
 ﻿using Data.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Marks;
-using Data;
-using Project.Utils;
 using Data.Models;
-using Project.Dtos.Subjects;
-using Project.Dtos.Students;
-using System.ComponentModel.DataAnnotations;
 
 namespace Project.Controllers
 {
+    /// <summary>
+    /// Controller that handles requests/responses for student notes
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class MarksController : ControllerBase
@@ -64,7 +62,7 @@ namespace Project.Controllers
             dal.GetAllMarksAverage(studentId);
 
         /// <summary>
-        /// 
+        /// Returns the students ordered by the averages of their grades (False = Ascending / True = Descending)
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>

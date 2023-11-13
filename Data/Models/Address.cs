@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Data.Models
+﻿namespace Data.Models
 {
     public class Address
     {
@@ -8,9 +6,6 @@ namespace Data.Models
         public string City { get; set; }
         public string Street { get; set; }
         public int Number { get; set; }
-
-        public int StudentId { get; set; } 
-       
-
+        public int StudentId { get; set; }
     }
 }

@@ -1,20 +1,20 @@
-﻿using Data.Models;
+﻿using Data.Exceptions;
+using Data.Models;
 using Project.Dtos.Marks;
 
 namespace Data.DAL
 {
-    // public partial class DataAccessLayerService
     public partial class DataAccessLayerService : IDataAccessLayerService
     {
         public void AddMark(int grade, int studentId, int subjectId)
         {
             if (!context.Students.Any(s => s.Id == studentId))
             {
-                throw new InvalidIdException("Invalid Student Id");
+                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
             }
             if (!context.Subjects.Any(s => s.Id == subjectId))
             {
-                throw new InvalidIdException("Invalid Subject Id");
+                throw new InvalidIdException($"The Id: {subjectId}, does not match any student on the Database");
             }
 
             context.Marks.Add(new Mark { Grade = grade, DateTime = DateTime.Now, StudentId = studentId, SubjectId = subjectId });
@@ -32,11 +32,11 @@ namespace Data.DAL
         {
             if (!context.Students.Any(s => s.Id == studentId))
             {
-                throw new InvalidIdException("Invalid Student Id");
+                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
             }
             if (!context.Subjects.Any(s => s.Id == subjectId))
             {
-                throw new InvalidIdException("Invalid Subject Id");
+                throw new InvalidIdException($"The Id: {subjectId}, does not match any student on the Database");
             }
 
             var mark = context.Marks.Where(s => s.StudentId == studentId && s.SubjectId == subjectId);
@@ -45,8 +45,12 @@ namespace Data.DAL
 
         public IEnumerable<Mark> GetAllMarksAverage(int studentId)
         {
-            // Calculate the average marks per subject for the student.
-            var subjectAverages = context.Marks
+            if (!context.Students.Any(s => s.Id == studentId))
+            {
+                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
+            }
+
+            var subjectAverages = context.Marks   // calculando el average 
                 .Where(m => m.StudentId == studentId)
                 .GroupBy(m => m.SubjectId)
                 .Select(group => new
@@ -55,16 +59,13 @@ namespace Data.DAL
                     AverageMark = group.Average(m => m.Grade)
                 }).ToList();
 
-            // Update the average mark for each subject in the Mark model.
-            foreach (var subjectAverage in subjectAverages)
+            foreach (var subjectAverage in subjectAverages)  // actualiza average 
             {
-                // Find all marks for the current subject and student.
                 var marksForSubject = context.Marks
                     .Where(m => m.StudentId == studentId && m.SubjectId == subjectAverage.SubjectId);
 
                 foreach (var mark in marksForSubject)
                 {
-                    // Update the Average property for each mark.
                     mark.Average = subjectAverage.AverageMark;
                 }
             }
@@ -72,7 +73,7 @@ namespace Data.DAL
 
             var updatedMarks = context.Marks.Where(m => m.StudentId == studentId).ToList();
             return updatedMarks;
-        }          
+        }
 
         public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order)
         {
@@ -81,8 +82,8 @@ namespace Data.DAL
                 {
                     StudentId = student.Id,
                     Name = student.Name,
-                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0    //If the student has any marks, then calculate the average grade of those marks. Otherwise, set the average grade to 0.               
-                });                                                                                 //?: This is the ternary operator that acts as a shorthand if. If the condition before the ? is true, the expression immediately after the ? is executed.
+                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0 
+                });
 
             if (order == false)
             {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Data.Models
+﻿namespace Data.Models
 {
     public class Mark
     {
@@ -13,7 +6,7 @@ namespace Data.Models
         public int Grade { get; set; }
         public DateTime DateTime { get; set; } 
 
-        public double Average { get; set; } // NEW VARIABLE
+        public double Average { get; set; }
         public int? SubjectId { get; set; }
         public Subject Subject { get; set; }
 

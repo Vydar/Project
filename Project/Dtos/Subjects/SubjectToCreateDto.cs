@@ -5,7 +5,7 @@ namespace Project.Dtos.Subjects
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectToCreateDto // : ControllerBase
+    public class SubjectToCreateDto 
     {
         /// <summary>
         /// Subject Name

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Data.DAL
 {
     public partial class DataAccessLayerService : IDataAccessLayerService
-    {       
+    {
         public void Seed()
         {
             context.Add(new Student

@@ -1,9 +1,12 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Data
+namespace Data.Exceptions
 {
+    /// <summary>
+    /// Exception that handles the use of invalid ids in the Database
+    /// </summary>
     [Serializable]
-    public class InvalidIdException : Exception
+   public class InvalidIdException : Exception
     {
         public InvalidIdException()
         {

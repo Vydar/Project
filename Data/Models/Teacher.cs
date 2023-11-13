@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Data.DAL.DataAccessLayerService;
+﻿using static Data.DAL.DataAccessLayerService;
 
 namespace Data.Models
 {
@@ -13,8 +8,6 @@ namespace Data.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public Rank Rank { get; set; }
-
         public int SubjectId { get; set; }
-
     }
 }

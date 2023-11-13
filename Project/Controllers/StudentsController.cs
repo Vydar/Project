@@ -1,5 +1,5 @@
-﻿using Data;
-using Data.DAL;
+﻿using Data.DAL;
+using Data.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Students;
 using Project.Utils;
@@ -7,8 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.Controllers
 {
+    /// <summary>
+    /// Controller that handles requests/responses for Students
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+
     public class StudentsController : ControllerBase
     {
 
@@ -19,7 +23,7 @@ namespace Project.Controllers
         }
 
         /// <summary>
-        /// Returns all Students from the Database
+        /// Returns all students from the database.
         /// </summary>
         [HttpGet]
         public IEnumerable<StudentToGetDto> GetAllStudents()
@@ -88,8 +92,9 @@ namespace Project.Controllers
         /// <param name="studentToUpdate"></param>
         /// <returns>New values of a Student</returns>
         [HttpPatch]
-        public StudentToGetDto UpdateStudent([FromBody] StudentToUpdateDto studentToUpdate) =>
-            dal.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
+        public StudentToGetDto UpdateStudent([FromBody] StudentToUpdateDto studentToUpdate)
+                 => dal.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
+
 
         /// <summary>
         /// Updates or creates an Address
@@ -110,7 +115,7 @@ namespace Project.Controllers
             return Ok();
         }
 
-       
+
 
     }
 }

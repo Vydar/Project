@@ -2,7 +2,11 @@
 
 namespace Data
 {
+    /// <summary>
+    /// Exception that handles the creation of duplicated objects in the Database
+    /// </summary>
     [Serializable]
+    
     public class DuplicateObjectException : Exception
     {
         public DuplicateObjectException()

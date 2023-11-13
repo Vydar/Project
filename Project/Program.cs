@@ -1,10 +1,8 @@
-using Data;
 using Data.DAL;
+using Data.Filters;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Configuration;
 using System.Reflection;
 
 namespace Project
@@ -17,34 +15,38 @@ namespace Project
             var connString = builder.Configuration.GetConnectionString("SqlDbConnectionString");
 
             // Add services to the container.
-           //builder.Services.AddSingleton<IDataAccessLayerService>(new DataAccessLayerService(connString));
 
-            builder.Services.AddDbContext<StudentsDbContext,StudentsDbContext>(options => options.UseSqlServer(connString));
 
+            builder.Services.AddDbContext<StudentsDbContext>(options => options.UseSqlServer(connString));
             builder.Services.AddScoped<IDataAccessLayerService, DataAccessLayerService>();
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<InvalidIdExceptionFilter>();
+                            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(o=>AddSwaggerDocumentation(o));
+            builder.Services.AddSwaggerGen(o => AddSwaggerDocumentation(o));
 
-            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                // app.UseSwaggerUI();
+
+                app.UseSwaggerUI(options =>
+                    options.DefaultModelsExpandDepth(-1)); //resets schemas
+
             }
 
-            app.UseAuthentication(); // error on console 
-            // Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1] An unhandled exception has occurred while executing the request. System.InvalidOperationException: Unable to resolve service for type 'Data.DAL.DataAccessLayerService' while attempting to activate 'Project.Controllers.MarksController'.*/
-          
+           app.UseAuthentication(); // error on console 
+                                     // Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1] An unhandled exception has occurred while executing the request. System.InvalidOperationException: Unable to resolve service for type 'Data.DAL.DataAccessLayerService' while attempting to activate 'Project.Controllers.MarksController'.*/
+
             app.UseAuthorization();
-
-
-
 
 
             app.MapControllers();

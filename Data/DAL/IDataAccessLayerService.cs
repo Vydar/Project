@@ -4,6 +4,9 @@ using Project.Dtos.Marks;
 
 namespace Data.DAL
 {
+    /// <summary>
+    /// Interface containing all the methods for the Data Access Layer
+    /// </summary>
     public interface IDataAccessLayerService
     {
         #region Student Interfaces
@@ -30,6 +33,10 @@ namespace Data.DAL
         //Teacher CreateTeacher(Teacher teacher);
         bool CreateTeacher(int subjectId, Teacher newTeacher);
         void DeleteTeacher(int id);
+        Teacher UpdateTeacherAddress(int id, string newAddress);
+        Teacher PromoteTeacher(int id);
+        IEnumerable<Mark> GetNotesFromTeacher(int id);
+
         #endregion
     }
 

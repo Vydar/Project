@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Project.Controllers
 {
+    /// <summary>
+    /// Controller that populates the database with students
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class SeedController : ControllerBase
@@ -15,7 +18,7 @@ namespace Project.Controllers
         }
 
         /// <summary>
-        /// Initializes the Database with Students data
+        /// Initializes the database with students data
         /// </summary>
         [HttpPost()]
         public void Seed() =>
