@@ -10,11 +10,11 @@ namespace Data.DAL
         {
             if (!context.Students.Any(s => s.Id == studentId))
             {
-                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
+                throw new InvalidIdException($"The Id {studentId}, does not match any student on the Database");
             }
             if (!context.Subjects.Any(s => s.Id == subjectId))
             {
-                throw new InvalidIdException($"The Id: {subjectId}, does not match any student on the Database");
+                throw new InvalidIdException($"The Id {subjectId}, does not match any student on the Database");
             }
 
             context.Marks.Add(new Mark { Grade = grade, DateTime = DateTime.Now, StudentId = studentId, SubjectId = subjectId });
@@ -32,11 +32,11 @@ namespace Data.DAL
         {
             if (!context.Students.Any(s => s.Id == studentId))
             {
-                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
+                throw new InvalidIdException($"The Id {studentId}, does not match any student on the Database");
             }
             if (!context.Subjects.Any(s => s.Id == subjectId))
             {
-                throw new InvalidIdException($"The Id: {subjectId}, does not match any student on the Database");
+                throw new InvalidIdException($"The Id {subjectId}, does not match any student on the Database");
             }
 
             var mark = context.Marks.Where(s => s.StudentId == studentId && s.SubjectId == subjectId);
@@ -47,7 +47,7 @@ namespace Data.DAL
         {
             if (!context.Students.Any(s => s.Id == studentId))
             {
-                throw new InvalidIdException($"The Id: {studentId}, does not match any student on the Database");
+                throw new InvalidIdException($"The Id {studentId}, does not match any student on the Database");
             }
 
             var subjectAverages = context.Marks   // calculando el average 

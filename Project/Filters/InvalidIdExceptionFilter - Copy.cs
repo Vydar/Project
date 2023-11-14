@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Data.Filters
 {
-    public class InvalidIdExceptionFilter : IActionFilter, IOrderedFilter
+    public class DuplicateObjectExceptionFilter : IActionFilter, IOrderedFilter
     {
         public int Order => int.MaxValue - 10;
 
@@ -12,17 +12,15 @@ namespace Data.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Exception is InvalidIdException ex)
+            if (context.Exception is DuplicateObjectException ex)
             {
                 context.Result = new ObjectResult(ex.Message)
                 {
-                    StatusCode = StatusCodes.Status404NotFound
+                    StatusCode = StatusCodes.Status400BadRequest
                 };
 
                 context.ExceptionHandled = true;
             }
-
-
         }
     }
 }
