@@ -1,5 +1,9 @@
 ﻿namespace Data.Models
 {
+
+    /// <summary>
+    /// Notes model - Id, Grade, DateTime, Average, SubjectId, StudentId
+    /// </summary>
     public class Mark
     {
         public int Id { get; set; }

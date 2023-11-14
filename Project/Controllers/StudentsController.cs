@@ -41,17 +41,10 @@ namespace Project.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToGetDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public ActionResult<StudentToGetDto> GetStudentById([Range(1, int.MaxValue)] int id)
-        {
-            try
-            {
-                return dal.GetStudentById(id).ToDto(); //DTO as Extension Method - allow a method to be added to an object, including a class or a type, after it has been compiled.
-            }
-            catch (InvalidIdException exception)
-            {
-                return BadRequest(exception.Message);
-            }
-        }
+        public ActionResult<StudentToGetDto> GetStudentById([Range(1, int.MaxValue)] int id) =>
+             dal.GetStudentById(id).ToDto(); //DTO as Extension Method - allow a method to be added to an object, including a class or a type, after it has been compiled.
+
+
 
 
         /// <summary>
@@ -68,21 +61,9 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("{id}")]
-        public IActionResult DeleteStudent([Range(1, int.MaxValue)] int id)
+        public void DeleteStudent([Range(1, int.MaxValue)] int id)
         {
-            //if (id == 0)
-            //{
-            //    return BadRequest("ID can not be 0");
-            //}
-            try
-            {
-                dal.DeleteStudent(id);
-            }
-            catch (InvalidIdException exception)
-            {
-                return BadRequest(exception.Message);
-            }
-            return Ok();
+            dal.DeleteStudent(id);
         }
 
 

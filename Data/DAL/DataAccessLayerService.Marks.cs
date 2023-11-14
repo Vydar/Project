@@ -6,6 +6,13 @@ namespace Data.DAL
 {
     public partial class DataAccessLayerService : IDataAccessLayerService
     {
+        /// <summary>
+        /// Adds a note to a student
+        /// </summary>
+        /// <param name="grade"></param>
+        /// <param name="studentId"></param>
+        /// <param name="subjectId"></param>
+        /// <exception cref="InvalidIdException"></exception>
         public void AddMark(int grade, int studentId, int subjectId)
         {
             if (!context.Students.Any(s => s.Id == studentId))
@@ -21,13 +28,24 @@ namespace Data.DAL
             context.SaveChanges();
         }
 
-
+        /// <summary>
+        /// Gets all the notes of a student
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
         public IEnumerable<Mark> GetAllMarks(int studentId)
         {
             var marks = context.Marks.Where(m => m.StudentId == studentId).ToList();
             return marks;
         }
 
+        /// <summary>
+        /// Gets all the notes of a student on one specific subject.
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="subjectId"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidIdException"></exception>
         public IEnumerable<Mark> GetMarkBySubject(int studentId, int subjectId)
         {
             if (!context.Students.Any(s => s.Id == studentId))
@@ -43,6 +61,12 @@ namespace Data.DAL
             return mark.ToList();
         }
 
+        /// <summary>
+        /// Returns the average of notes of a student.
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidIdException"></exception>
         public IEnumerable<Mark> GetAllMarksAverage(int studentId)
         {
             if (!context.Students.Any(s => s.Id == studentId))
@@ -75,6 +99,11 @@ namespace Data.DAL
             return updatedMarks;
         }
 
+        /// <summary>
+        /// Returns a list of students based on their averages.
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns>If true = Groups in ascending order ~ If false = Groups in descending order </returns>
         public IEnumerable<StudentAverageDto> GetStudentsWithAverageGrade(bool order)
         {
             var studentsWithAverages = context.Students
@@ -82,7 +111,7 @@ namespace Data.DAL
                 {
                     StudentId = student.Id,
                     Name = student.Name,
-                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0 
+                    AverageGrade = student.Marks.Any() ? student.Marks.Average(m => m.Grade) : 0
                 });
 
             if (order == false)
@@ -94,10 +123,6 @@ namespace Data.DAL
                 return studentsWithAverages.OrderByDescending(s => s.AverageGrade).ToList();
             }
         }
-
-
-
-
     }
 }
 

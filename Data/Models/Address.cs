@@ -1,5 +1,8 @@
 ﻿namespace Data.Models
 {
+    /// <summary>
+    /// Address model - Id, City, Street, Number, StudentId
+    /// </summary>
     public class Address
     {
         public int Id { get; set; }
