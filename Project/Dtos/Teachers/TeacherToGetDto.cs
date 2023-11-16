@@ -8,7 +8,6 @@ namespace Project.Dtos.Teachers
         public string Name { get; set; }
         public String Address { get; set; }
         
-        //public int SubjectId { get; set; }
         public Rank Rank { get; set; }
 
     }

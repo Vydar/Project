@@ -4,7 +4,7 @@ using Project.Dtos.Teachers;
 
 namespace Project.Utils
 {
-    public static  class TeacherUtils
+    public static class TeacherUtils
     {
         public static Teacher ToEntity(this TeacherToCreateDto teacher)
         {
@@ -17,7 +17,6 @@ namespace Project.Utils
                 Name = teacher.Name,
                 Address = teacher.Address,
                 Rank = teacher.Rank,
-                //SubjectId = teacher.SubjectId,
             };
         }
 
@@ -32,8 +31,6 @@ namespace Project.Utils
                 Name = teacher.Name,
                 Address = teacher.Address,
                 Rank = teacher.Rank,
-                //SubjectId = teacher.SubjectId,
-
             };
 
         }

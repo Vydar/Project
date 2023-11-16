@@ -24,8 +24,9 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="markToCreate"></param>
         /// <returns></returns>
-
-        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [HttpPost("add-note/{id}")]   
         public void AddMark([FromBody] MarkToCreateDto mark) =>
         dal.AddMark(mark.Grade, mark.StudentId, mark.SubjectId);
 
@@ -35,8 +36,9 @@ namespace Project.Controllers
         /// <param name="markToCreate"></param>
         /// <returns></returns>
         /// 
-
-        [HttpGet("ByStudent/{studentId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [HttpGet("notes-info/{studentId}")]
         public IEnumerable<Mark> GetAllMarks([FromRoute] int studentId) =>
           dal.GetAllMarks(studentId).ToList();
 
@@ -47,7 +49,9 @@ namespace Project.Controllers
         /// <param name="markToCreate"></param>
         /// <returns></returns>
         /// 
-        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [HttpGet("notes/{studentId}/{subjectId}")]
         public IEnumerable<Mark> GetMarkbySubject(int studentId, int subjectId) =>
             dal.GetMarkBySubject(studentId, subjectId);
 
@@ -57,7 +61,9 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="studentId"></param>
         /// <returns></returns>
-        [HttpGet("{studentId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [HttpGet("all-notes/{studentId}")]
         public IEnumerable<Mark> GetAllMarksAverage(int studentId) =>
             dal.GetAllMarksAverage(studentId);
 
@@ -68,7 +74,7 @@ namespace Project.Controllers
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentAverageDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        [HttpGet("WithAverages")]
+        [HttpGet("averages/all")]
         public ActionResult<IEnumerable<StudentAverageDto>> GetStudentsWithAverages([FromQuery] bool order)
         {
             try

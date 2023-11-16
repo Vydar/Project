@@ -5,21 +5,14 @@ namespace Project.Dtos.Teachers
 {
     public class TeacherToCreateDto
     {
-        /// <summary>
-        /// Teacher's Name
-        /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Teacher name can not be empty")]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Address
-        /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Address can not be empty")]
         public string Address { get; set; }
-
-        /// <summary>
-        /// Rank
-        /// </summary>
-        [Range(0, 3)]
+               
+        [Range(0, 3, ErrorMessage ="Range value must be between 0 - 3")]
         public Rank Rank { get; set; }
-        //public int SubjectId { get; set; }
+       
     }
 }

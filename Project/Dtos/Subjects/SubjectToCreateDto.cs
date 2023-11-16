@@ -7,9 +7,7 @@ namespace Project.Dtos.Subjects
     [ApiController]
     public class SubjectToCreateDto 
     {
-        /// <summary>
-        /// Subject Name
-        /// </summary>
+       
         public string Name { get; set; }
 
     }

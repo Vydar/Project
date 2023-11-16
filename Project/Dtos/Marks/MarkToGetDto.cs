@@ -5,8 +5,9 @@ namespace Project.Dtos.Marks
     public class MarkToGetDto
     {
         /// <summary>
-        /// Student Name
+        /// Name of the student
         /// </summary>
+        
         public string StudentName { get; set; }
         /// <summary>
         /// Average of all notes

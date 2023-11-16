@@ -52,6 +52,8 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="studentToCreate">student to create data</param>
         /// <returns>creates student data</returns>
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(StudentToCreateDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpPost]
         public StudentToGetDto CreateStudent([FromBody] StudentToCreateDto studentToCreate) =>
             dal.CreateStudent(studentToCreate.ToEntity()).ToDto();
@@ -60,6 +62,8 @@ namespace Project.Controllers
         /// Removes a Student from the Database
         /// </summary>
         /// <param name="id"></param>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpDelete("{id}")]
         public void DeleteStudent([Range(1, int.MaxValue)] int id)
         {
@@ -72,6 +76,8 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="studentToUpdate"></param>
         /// <returns>New values of a Student</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpPatch]
         public StudentToGetDto UpdateStudent([FromBody] StudentToUpdateDto studentToUpdate)
                  => dal.UpdateStudent(studentToUpdate.ToEntity()).ToDto();
@@ -85,6 +91,7 @@ namespace Project.Controllers
         /// 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpPut("{id}")]
         public IActionResult UpdateStudentAddress([FromRoute] int id, [FromBody] AddressToUpdateDto addressToUpdate)
         {

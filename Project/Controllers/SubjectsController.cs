@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project.Dtos.Marks;
 using Project.Dtos.Subjects;
 using Project.Utils;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.Controllers
 {
@@ -26,9 +27,12 @@ namespace Project.Controllers
         /// <summary>
         /// Creates a new Subject
         /// </summary>
-        [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpPost("create/{id}")]
         public void CreateSubject([FromBody] string subjectName) =>
-            dal.CreateSubject(subjectName); //toDTO missing
+            dal.CreateSubject(subjectName); 
 
 
         /// <summary>
@@ -36,22 +40,12 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        [HttpDelete("{id}")] 
-        public IActionResult DeleteSubject(int id)
+        [HttpDelete("/Delete/{id}")]
+        public IActionResult DeleteSubject([Range(1, int.MaxValue)] int id)
         {
-            if (id == 0)
-            {
-                return BadRequest("ID can not be 0");
-            }
-            try
-            {
-                dal.DeleteSubject(id);
-            }
-            catch (InvalidIdException exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            dal.DeleteSubject(id);
             return Ok();
         }
     }
