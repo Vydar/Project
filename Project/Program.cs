@@ -44,14 +44,9 @@ namespace Project
                 app.UseSwaggerUI();
             }
 
-            app.UseAuthentication(); // error on console 
-                                     // Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1] An unhandled exception has occurred while executing the request. System.InvalidOperationException: Unable to resolve service for type 'Data.DAL.DataAccessLayerService' while attempting to activate 'Project.Controllers.MarksController'.*/
+            app.UseAuthentication(); 
 
             app.UseAuthorization();
-
-
-
-
 
             app.MapControllers();
 
