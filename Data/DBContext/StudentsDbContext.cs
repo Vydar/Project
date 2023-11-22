@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 
-namespace Data.Models
+namespace Data.DBContext
 {
-    public class StudentsDbContext : DbContext //implement interface to make private or internal? 
+   internal class StudentsDbContext : DbContext , IStudentsDbContext
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Address> Addresses { get; set; }

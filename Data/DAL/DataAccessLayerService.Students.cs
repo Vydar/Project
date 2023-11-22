@@ -1,6 +1,10 @@
-﻿using Data.Exceptions;
+﻿using Data.DBContext;
+using Data.Exceptions;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace Data.DAL
 {
@@ -10,29 +14,19 @@ namespace Data.DAL
     /// <remarks>
     /// Contains methods for accessing the database data
     /// </remarks>
-    public partial class DataAccessLayerService : IDataAccessLayerService
+   internal partial class DataAccessLayerService : IDataAccessLayerService
     {
         private readonly StudentsDbContext context;
         public DataAccessLayerService(StudentsDbContext context)
         {
             this.context = context;
         }
-
-        /// <summary>
-        /// Gets all student data from the database.
-        /// </summary>
-        /// <returns></returns>
+       
         public IEnumerable<Student> GetAllStudents()
         {
             return context.Students.ToList();
         }
-
-        /// <summary>
-        /// Gets all student data based on an Id.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidIdException"></exception>
+  
         public Student GetStudentById(int id)
         {
             var student = context.Students.FirstOrDefault(s => s.Id == id);
@@ -43,12 +37,6 @@ namespace Data.DAL
             return student;
         }
 
-        /// <summary>
-        /// Creates a new student 
-        /// </summary>
-        /// <param name="student"></param>
-        /// <returns></returns>
-        /// <exception cref="DuplicateObjectException"></exception>
         public Student CreateStudent(Student student)
         {
             if (context.Students.Any(s => s.Id == student.Id))
@@ -59,12 +47,7 @@ namespace Data.DAL
             context.SaveChanges();
             return student;
         }
-
-        /// <summary>
-        /// Deletes a student
-        /// </summary>
-        /// <param name="id"></param>
-        /// <exception cref="InvalidIdException"></exception>
+      
         public void DeleteStudent(int id)
         {
             var student = context.Students.FirstOrDefault(s => s.Id == id);
@@ -76,12 +59,6 @@ namespace Data.DAL
             context.SaveChanges();
         }
 
-        /// <summary>
-        /// Updates the student data based on Id
-        /// </summary>
-        /// <param name="studentToUpdate"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidIdException"></exception>
         public Student UpdateStudent(Student studentToUpdate)
         {
             var student = context.Students.FirstOrDefault(s => s.Id == studentToUpdate.Id);
@@ -98,13 +75,7 @@ namespace Data.DAL
             return student;
         }
 
-        /// <summary>
-        /// Creates a new address for a student. If the student already has an address on the database then updates it. 
-        /// </summary>
-        /// <param name="studentId"></param>
-        /// <param name="newAddress"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidIdException"></exception>
+
         public bool UpdateOrCreateStudentAddress(int studentId, Address newAddress)
         {
             var student = context.Students

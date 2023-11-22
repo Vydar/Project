@@ -12,7 +12,7 @@ namespace Project.Dtos.Teachers
         public string Address { get; set; }
                
         [Range(0, 3, ErrorMessage ="Range value must be between 0 - 3")]
-        public Rank Rank { get; set; }
+        internal Rank Rank { get; set; }
        
     }
 }

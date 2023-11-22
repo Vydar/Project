@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Data.DAL
 {
-    public partial class DataAccessLayerService : IDataAccessLayerService
+   internal partial class DataAccessLayerService : IDataAccessLayerService
     {
         /// <summary>
         /// Ranks available for teachers
         /// </summary>
-        public enum Rank
+       internal enum Rank
         {
             Professor,
             AssociateProfessor,
@@ -33,9 +33,15 @@ namespace Data.DAL
         public bool CreateTeacher(int subjectId, Teacher newTeacher)
         {
             var subject = context.Subjects.Include(s => s.Teacher).FirstOrDefault(s => s.Id == subjectId);
-            if (subjectId == null)
+
+            if (subject == null)
             {
-                throw new InvalidIdException($"The Id {subjectId} does not match any subject on the Database");
+                throw new InvalidIdException($"The Id {subjectId} does not match any subject on the database. Unable to create teacher. ");
+            }
+
+            if (context.Teachers.Any(t => t.SubjectId == subjectId))
+            {
+                throw new DuplicateObjectException($"The subject already has assigned a teacher on the Database");
             }
 
             var isCreated = false;

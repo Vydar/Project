@@ -6,9 +6,8 @@ namespace Project.Dtos.Teachers
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public String Address { get; set; }
-        
-        public Rank Rank { get; set; }
+         public String Address { get; set; }
+        internal Rank Rank { get; set; }
 
     }
 }

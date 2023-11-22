@@ -30,9 +30,9 @@ namespace Project.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        [HttpPost("create/{id}")]
+        [HttpPost("New")]
         public void CreateSubject([FromBody] string subjectName) =>
-            dal.CreateSubject(subjectName); 
+            dal.CreateSubject(subjectName);
 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpDelete("/Delete/{id}")]
         public IActionResult DeleteSubject([Range(1, int.MaxValue)] int id)

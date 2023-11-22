@@ -7,7 +7,9 @@ namespace Data.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public Rank Rank { get; set; }
+        internal Rank Rank { get; set; } //why internal
         public int SubjectId { get; set; }
+
+     
     }
 }

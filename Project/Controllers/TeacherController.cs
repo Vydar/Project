@@ -22,6 +22,17 @@ namespace Project.Controllers
         }
 
         /// <summary>
+        /// Ranks available for teachers
+        /// </summary>
+        public enum Rank
+        {
+            Professor,
+            AssociateProfessor,
+            AssistantProfessor,
+            Instructor,
+        }
+
+        /// <summary>
         /// Creates a new teacher
         /// </summary>
         /// <param name="teacherToCreate"></param>
@@ -57,7 +68,7 @@ namespace Project.Controllers
         /// <param name="id"></param>
         /// <param name="newAddress"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TeacherToGetDto))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpPatch("/Address/update/{id}")]
         public IActionResult UpdateTeacherAddress([Range(1, int.MaxValue)] int id, [Required(AllowEmptyStrings = false, ErrorMessage = "Address can not be empty")] string newAddress)

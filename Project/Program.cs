@@ -1,11 +1,8 @@
-using Data;
 using Data.DAL;
+using Data.DBContext;
 using Data.Filters;
-using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Configuration;
 using System.Reflection;
 
 namespace Project
@@ -18,12 +15,9 @@ namespace Project
             var connString = builder.Configuration.GetConnectionString("SqlDbConnectionString");
 
             // Add services to the container.
-            //builder.Services.AddSingleton<IDataAccessLayerService>(new DataAccessLayerService(connString));
-
-            builder.Services.AddDbContext<StudentsDbContext, StudentsDbContext>(options => options.UseSqlServer(connString));
-
+            builder.Services.AddDbContext<StudentsDbContext>(options => options.UseSqlServer(connString));
             builder.Services.AddScoped<IDataAccessLayerService, DataAccessLayerService>();
-
+                    
             builder.Services.AddControllers(options =>
             {
                 options.Filters.Add<InvalidIdExceptionFilter>();
