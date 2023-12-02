@@ -1,9 +1,17 @@
-﻿namespace Project.Dtos.Marks
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Project.Dtos.Marks
 {
     public class StudentAverageDto
     {
+        /// <summary>
+        /// Student Identification Number
+        /// </summary>
         public int StudentId { get; set; }
-
+        /// <summary>
+        /// Student Name
+        /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Name can not be empty")]
         public string Name { get; set; }
 
         /// <summary>

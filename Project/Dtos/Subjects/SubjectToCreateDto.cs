@@ -5,9 +5,11 @@ namespace Project.Dtos.Subjects
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectToCreateDto 
+    public class SubjectToCreateDto
     {
-       
+        /// <summary>
+        /// Subject Name
+        /// </summary>
         public string Name { get; set; }
 
     }

@@ -11,11 +11,15 @@ namespace Project.Dtos.Marks
         /// </summary>
         [Range(1, 10, ErrorMessage = "Value must be between 1 to 10")]
         public int Grade { get; set; }
-
-        [Range(0, int.MaxValue)]
+        /// <summary>
+        /// Student identification number 
+        /// </summary>
+        [Range(0, int.MaxValue, ErrorMessage = "Value must be a positive")]
         public int StudentId { get; set; }
-
-        [Range(0, int.MaxValue)]
+        /// <summary>
+        /// Subject identification number 
+        /// </summary>
+        [Range(0, int.MaxValue, ErrorMessage = "Value must be a positive")]
         public int SubjectId { get; set; }
 
 

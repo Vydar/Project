@@ -7,7 +7,7 @@ namespace Project.Dtos.Marks
         /// <summary>
         /// Name of the student
         /// </summary>
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Student name can not be empty")]
         public string StudentName { get; set; }
         /// <summary>
         /// Average of all notes
